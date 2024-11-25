@@ -12,7 +12,7 @@ export default function Home() {
         alignItems: "center",
         height: "100vh",
         width: "100vw",
-        backgroundImage: "url(/images/background.jpg)",
+        backgroundImage: "url(/images/7301428.jpg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         position: "relative",

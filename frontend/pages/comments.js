@@ -4,6 +4,7 @@ import Link from "next/link";
 import { io } from "socket.io-client";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import axios from "axios"; 
 
 const socket = io("http://localhost:4000");
 
@@ -35,9 +36,8 @@ export default function Comments() {
 
   const fetchComments = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/comments");
-      const data = await response.json();
-      setComments(data);
+      const response = await axios.get("http://localhost:4000/api/comments"); // Using Axios GET
+      setComments(response.data);
     } catch (error) {
       console.error("Error fetching comments:", error);
     }
@@ -52,13 +52,15 @@ export default function Comments() {
     const commentData = { username, comment: newComment };
 
     try {
-      const response = await fetch("http://localhost:4000/api/comments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(commentData),
-      });
+      const response = await axios.post(
+        "http://localhost:4000/api/comments", // Using Axios POST
+        commentData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
-      if (response.ok) {
+      if (response.status === 200 || response.status === 201) {
         setNewComment("");
       } else {
         console.error("Failed to post comment.");
@@ -75,7 +77,7 @@ export default function Comments() {
         display: "flex",
         height: "100vh",
         width: "100vw",
-        backgroundImage: "url(/images/background.jpg)",
+        backgroundImage: "url(/images/7301428.jpg)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         flexDirection: isTabletOrMobile ? "column" : "row",
