@@ -1,6 +1,6 @@
 First encure you are inside the project directory if not then first do that by 
 cd real-time-comments-system
-# Real-Time Comments System
+# Comments System
 
 This is a real-time comments system where users can post comments and see them instantly.
 
